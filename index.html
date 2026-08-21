@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f7d4a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="BagBack">
+  <title>BagBack</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <img src="icons/icon-192.png" alt="BagBack icon" class="app-icon">
+    <div>
+      <h1>BagBack</h1>
+      <p>Drop it. Mark it. Pick it up on the way back.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="notice" id="iosNotice">
+      <strong>iPhone note:</strong> nearby reminders work only while BagBack is open. iOS may pause web location updates when the app is in the background or the phone is locked.
+    </section>
+
+    <section class="card status-card">
+      <div class="status-row">
+        <div>
+          <span class="eyebrow">Walk</span>
+          <strong id="walkStatus">Not started</strong>
+        </div>
+        <div class="status-dot" id="walkDot" aria-hidden="true"></div>
+      </div>
+      <div class="status-row">
+        <div>
+          <span class="eyebrow">GPS</span>
+          <strong id="gpsStatus">Waiting for permission</strong>
+          <small id="gpsDetail"></small>
+        </div>
+        <div class="status-dot" id="gpsDot" aria-hidden="true"></div>
+      </div>
+      <div class="button-grid">
+        <button id="startWalkBtn" class="primary">Start walk</button>
+        <button id="endWalkBtn" class="secondary" disabled>End walk</button>
+        <button id="dropBagBtn" class="primary wide" disabled>Drop bag here</button>
+      </div>
+      <div class="button-grid compact">
+        <button id="compassBtn" class="secondary wide">Enable compass</button>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>Saved bags</h2>
+        <span id="bagCount" class="pill">0</span>
+      </div>
+      <div id="emptyState" class="card empty-state">No bags to pick up.</div>
+      <div id="bagList" class="bag-list"></div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>Map</h2>
+        <button id="centerMapBtn" class="text-button">Center</button>
+      </div>
+      <div class="card map-card">
+        <div id="map"></div>
+        <div id="mapFallback" class="map-fallback">Map needs an internet connection.</div>
+      </div>
+    </section>
+
+    <section class="card settings-card">
+      <h2>Web version</h2>
+      <p>Install on iPhone: open this page in Safari, tap Share, then Add to Home Screen.</p>
+      <p>Your walk and bag data stays in this browser on this device. The map uses OpenFreeMap.</p>
+      <div class="settings-actions">
+        <a href="https://martin73mac.github.io/bagback-privacy/" target="_blank" rel="noopener">Privacy policy</a>
+        <button id="clearDataBtn" class="danger-link">Clear local data</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
